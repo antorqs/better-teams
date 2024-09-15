@@ -1,0 +1,28 @@
+  {
+    "name": "Better Teams",
+    "short_name": "BetterTeams",
+    "version": "0.1.0",
+    "description": "Better Teams. Improved MS Teams Experience.",
+    "manifest_version": 3,
+    "icons": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "content_scripts": [
+        {
+            "all_frames": true,
+            "matches": [
+                "https://teams.microsoft.com/*"
+            ],
+            "js": [
+                "src/better_teams.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "host_permissions": [
+        "https://noembed.com/*"
+    ]
+  }
