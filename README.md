@@ -33,6 +33,12 @@ Have a feature request, feedback, or found a bug? Feel free to [open an issue](h
 
 For any questions or suggestions, you can reach me at:
 
-- Email: antoniorafael.quirossandoval@telefonica.com
+- Email: antorqs@gmail.com
+
+
+## Thanks
+Thanks to [Abel](https://github.com/atabel) for his help with hacking the reaction buttons ;)
+Thanks to [Pablo](https://github.com/kydorn) for the relocation of the notifications ;)
 
 Thank you for using Better Teams! I hope this extension enhances your Microsoft Teams experience in fun and useful ways.
+
