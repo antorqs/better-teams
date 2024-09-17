@@ -4,12 +4,56 @@ Better Teams is a Chrome Extension that supercharges your Microsoft Teams experi
 
 ## 🌟 Features
 
-- **Spotify Integration**: Share Spotify links, and Better Teams will embed a playable media player directly in your chat. No need to leave the conversation to jam to your favorite tunes!
-- **YouTube & Shorts Integration**: Share YouTube videos or Shorts, and they’ll play right within the chat. No more navigating away from your conversation to watch videos.
-- **Twitter Embeds**: Instantly resolve tweets and display them with full media (images, videos) directly in your message feed.
-- **Instagram posts**: Share Instagram posts and they’ll be displayed right in the chat. Also videos can be played withouth leaving the conversation.
-- **Enhanced Call Reactions**: Move reaction buttons out of the popup menu and onto the call action bar. This helps you avoid the dreaded “Raise Hand” mistake when all you wanted to do was react with a 👍 or 🎉.
-- **Smart Notifications**: Notifications are relocated so they won’t block any critical buttons or text fields, ensuring you always have a clear view of what matters.
+### **Spotify Integration**: 
+
+Share Spotify links, and Better Teams will embed a playable media player directly in your chat. No need to leave the conversation to jam to your favorite tunes!
+
+**Sharing a song in a channel**:
+![Spotify Sharing a song](images/spotify_song.png)
+
+**Sharing a playlist in a chat**:
+![Spotify Sharing a playlist](images/spotify_list.png)
+
+---
+
+### **YouTube & Shorts Integration**: 
+Share YouTube videos or Shorts, and they’ll play right within the chat. No more navigating away from your conversation to watch videos.
+
+**Sharing a Youtube video**:
+![Youtube sharing a video](images/youtube_video.png)
+
+**Sharing a Youtube Short**:
+![Youtube sharing a Short](images/youtube_short.png)
+
+---
+
+### **X (Twitter) Embeds**: 
+Instantly resolve tweets and display them with full media (images, videos) directly in your message feed.
+
+**Sharing a tweet with an image**:
+![Sharing a tweet with image](images/twitter_image.png)
+
+**Sharing a tweet with a video**:
+![Sharing a tweet with video](images/twitter_video.png)
+
+---
+### **Instagram posts**: 
+Share Instagram posts and they’ll be displayed right in the chat. Also videos can be played withouth leaving the conversation.
+
+**Sharing an Instagram post**:
+![Instagram post](images/instagram_post.png)
+
+---
+### **Enhanced Call Reactions**: 
+Move reaction buttons out of the popup menu and onto the call action bar. This helps you avoid the dreaded “Raise Hand” mistake when all you wanted to do was react with a 👍 or 👏.
+
+**Reactions are now away from "raise hand"**:
+![Reaction buttons easy access](images/reactions.png)
+
+---
+
+### **Relocated Notifications**: 
+Notifications are relocated so they won’t block any critical buttons or text fields, ensuring you always have a clear view of what matters.
 
 ## 🚀 Installation
 
@@ -22,13 +66,13 @@ Better Teams is a Chrome Extension that supercharges your Microsoft Teams experi
 ## 💡 Usage
 
 1. Open Microsoft Teams in your Google Chrome browser.
-2. Share a YouTube video, tweet, or Spotify link in your Teams chat.
+2. Share or receive a YouTube video, tweet, or Spotify link in your Teams chat.
 3. Better Teams will automatically detect the media and embed it directly in the conversation for a seamless experience.
 4. In a call? Use the newly placed reaction buttons, far away from the "Raise Hand" button for easier, mistake-free reactions!
 
 ## 🛠️ Contribution & Issues
 
-Have a feature request, feedback, or found a bug? Feel free to [open an issue](https://github.com/yourusername/better-teams/issues) or contribute via a pull request. Let’s make Microsoft Teams better, together!
+Have a feature request, feedback, or found a bug? Feel free to [open an issue](https://github.com/antorqs/better-teams/issues) or contribute via a pull request. Let’s make Microsoft Teams better, together!
 
 ## 📧 Contact
 
