@@ -43,7 +43,8 @@ const spotifyUrl = "https://open.spotify.com/oembed?url="
 const iFrames = {
     "tweet": "<iframe height=600 width=500 border=0 frameborder=0 src='https://twitframe.com/show?url=TWEETURL'></iframe>",
     "youtube-video": '<iframe width="500" height="300" src="https://www.youtube.com/embed/VIDEOID?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>',
-    "youtube-short": '<iframe width="315" height="560" src="YTSHORTURL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;gyroscope; picture-in-picture;web-share;fullscreen"></iframe>'
+    "youtube-short": '<iframe width="315" height="560" src="YTSHORTURL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;gyroscope; picture-in-picture;web-share;fullscreen"></iframe>',
+    "instagram-post": '<iframe src="https://www.instagram.com/p/IGPOSTID/embed" width="400" height="600" frameborder="0" scrolling="no" allowtransparency="true" allow="encrypted-media"></iframe>',
 }
 // End Constants
 
@@ -64,8 +65,15 @@ const isYoutubeShort = link => link.includes("youtube.com/shorts");
 
 const isYoutubeVideo = link => link.includes("youtube.com/v") || link.includes("youtube.com/watch");
 
+const isInstagramPost = link => link.includes("instagram.com/p/");
+
 function extractYouTubeVideoId(url) {
     const match = url.match(/(?:watch\?v=|v\/)([\w-]{11})/);
+    return match ? match[1] : null;
+}
+
+function extractInstagramPostId(url) {
+    const match = url.match(/\/p\/([^\/?]+)/);
     return match ? match[1] : null;
 }
 
@@ -112,6 +120,11 @@ async function getEmbed(link) {
     } else if (isYoutubeVideo(link)) {
         const videoId = extractYouTubeVideoId(link);
         embed.html = iFrames["youtube-video"].replace("VIDEOID", videoId);
+    } else if (isInstagramPost(link)) {
+        const postId = extractInstagramPostId(link);
+        if (postId) {
+            embed.html = iFrames["instagram-post"].replace("IGPOSTID", postId);
+        }
     } else {
         embed = await fetchLink(link);
     }
@@ -134,7 +147,9 @@ const processLink = async (target, link) => {
     if (embeddedMedia.length === 0 && isASupportedLink(href) && link.children.length === 0) {
         const result = await getEmbed(href);
         if (result.html) {
-            link.parentElement.innerHTML += `<br />${result.html}`;
+            if (link.parentElement) {
+                link.parentElement.innerHTML += `<br />${result.html}`;
+            } 
         }
     }
 };
@@ -143,7 +158,7 @@ const processMessage = async (message) => {
     const links = message.getElementsByTagName("a")
     for (const link of links) {
         await processLink(message, link)
-        setTimeout(() => { removeUrlPreview(message); }, "500");
+        setTimeout(() => { removeUrlPreview(message, link); }, "500");
     }
 }
 // End Process functions
@@ -259,7 +274,6 @@ const observerCallback = async function(mutationsList, observer) {
             template.setAttribute('id', 'reactions-shortcut');
             reactionsButtons.setAttribute('data-tid', 'reactions-popup-bt');
             template.appendChild(reactionsButtons);
-            //template.innerHTML = reactionsButtons.innerHTML;
 
             const buttons = template.querySelectorAll('button');
             buttons.forEach(button => {

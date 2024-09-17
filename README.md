@@ -1,6 +1,6 @@
 # Better Teams
 
-Better Teams is a Chrome Extension that supercharges your Microsoft Teams experience! Whether you're sharing media, reacting to a call, or avoiding notification pop-ups, Better Teams has your back. Seamlessly embed media, improve accessibility, and enjoy a more polished Teams interface.
+Better Teams is a Chrome Extension that supercharges your Microsoft Teams experience! Whether you're sharing media, reacting to a call, or avoiding notification pop-ups, Better Teams has your back. Seamlessly embed media, improve usability, and enjoy a more polished Teams interface.
 
 ## 🌟 Features
 
