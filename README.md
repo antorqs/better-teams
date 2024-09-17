@@ -7,6 +7,7 @@ Better Teams is a Chrome Extension that supercharges your Microsoft Teams experi
 - **Spotify Integration**: Share Spotify links, and Better Teams will embed a playable media player directly in your chat. No need to leave the conversation to jam to your favorite tunes!
 - **YouTube & Shorts Integration**: Share YouTube videos or Shorts, and they’ll play right within the chat. No more navigating away from your conversation to watch videos.
 - **Twitter Embeds**: Instantly resolve tweets and display them with full media (images, videos) directly in your message feed.
+- **Instagram posts**: Share Instagram posts and they’ll be displayed right in the chat. Also videos can be played withouth leaving the conversation.
 - **Enhanced Call Reactions**: Move reaction buttons out of the popup menu and onto the call action bar. This helps you avoid the dreaded “Raise Hand” mistake when all you wanted to do was react with a 👍 or 🎉.
 - **Smart Notifications**: Notifications are relocated so they won’t block any critical buttons or text fields, ensuring you always have a clear view of what matters.
 
