@@ -23,6 +23,8 @@ Notifications are relocated so they won’t block any critical buttons or text f
 
 Share Spotify links, and Better Teams will embed a playable media player directly in your chat. No need to leave the conversation to jam to your favorite tunes!
 
+Songs, playlists and artists links are supported.
+
 **Sharing a song in a channel**:
 ![Spotify Sharing a song](images/spotify_song.png)
 
@@ -42,10 +44,11 @@ Share YouTube videos or Shorts, and they’ll play right within the chat. No mor
 **Sharing a Youtube Short**:
 ![Youtube sharing a Short](images/youtube_short.png)
 
+Also Youtube playlists links are supported.
 ---
 \
 \
-![Twitter / X](https://www.logotypes.dev/twitter?variant=wordmark&version=color)
+![Twitter / X](https://logotypes.dev/x?version=black)
 ### **X (Twitter) Embeds**: 
 Instantly resolve tweets and display them with full media (images, videos) directly in your message feed.
 
@@ -101,3 +104,7 @@ Thanks to [Pablo](https://github.com/kydorn) for the relocation of the notificat
 
 Thank you for using Better Teams! I hope this extension enhances your Microsoft Teams experience in fun and useful ways.
 
+## Acknowladges
+Twitter integration is possible by using the service [TwitFrame](https://twitframe.com/)
+
+Logos for this readme are provided by the awesome service [Logotypes.dev](https://logotypes.dev/)
