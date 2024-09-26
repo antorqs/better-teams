@@ -4,46 +4,6 @@ Better Teams is a Chrome Extension that supercharges your Microsoft Teams experi
 
 ## 🌟 Features
 
-### **Spotify Integration**: 
-
-Share Spotify links, and Better Teams will embed a playable media player directly in your chat. No need to leave the conversation to jam to your favorite tunes!
-
-**Sharing a song in a channel**:
-![Spotify Sharing a song](images/spotify_song.png)
-
-**Sharing a playlist in a chat**:
-![Spotify Sharing a playlist](images/spotify_list.png)
-
----
-
-### **YouTube & Shorts Integration**: 
-Share YouTube videos or Shorts, and they’ll play right within the chat. No more navigating away from your conversation to watch videos.
-
-**Sharing a Youtube video**:
-![Youtube sharing a video](images/youtube_video.png)
-
-**Sharing a Youtube Short**:
-![Youtube sharing a Short](images/youtube_short.png)
-
----
-
-### **X (Twitter) Embeds**: 
-Instantly resolve tweets and display them with full media (images, videos) directly in your message feed.
-
-**Sharing a tweet with an image**:
-![Sharing a tweet with image](images/twitter_image.png)
-
-**Sharing a tweet with a video**:
-![Sharing a tweet with video](images/twitter_video.png)
-
----
-### **Instagram posts**: 
-Share Instagram posts and they’ll be displayed right in the chat. Also videos can be played withouth leaving the conversation.
-
-**Sharing an Instagram post**:
-![Instagram post](images/instagram_post.png)
-
----
 ### **Enhanced Call Reactions**: 
 Move reaction buttons out of the popup menu and onto the call action bar. This helps you avoid the dreaded “Raise Hand” mistake when all you wanted to do was react with a 👍 or 👏.
 
@@ -54,6 +14,58 @@ Move reaction buttons out of the popup menu and onto the call action bar. This h
 
 ### **Relocated Notifications**: 
 Notifications are relocated so they won’t block any critical buttons or text fields, ensuring you always have a clear view of what matters.
+
+---
+\
+\
+![Spotify](https://www.logotypes.dev/spotify?variant=wordmark&version=color)
+### **Spotify Integration**:  
+
+Share Spotify links, and Better Teams will embed a playable media player directly in your chat. No need to leave the conversation to jam to your favorite tunes!
+
+**Sharing a song in a channel**:
+![Spotify Sharing a song](images/spotify_song.png)
+
+**Sharing a playlist in a chat**:
+![Spotify Sharing a playlist](images/spotify_list.png)
+
+---
+\
+\
+![Youtube](https://www.logotypes.dev/youtube?variant=wordmark&version=color)
+### **YouTube & Shorts Integration**: 
+Share YouTube videos or Shorts, and they’ll play right within the chat. No more navigating away from your conversation to watch videos.
+
+**Sharing a Youtube video**:
+![Youtube sharing a video](images/youtube_video.png)
+
+**Sharing a Youtube Short**:
+![Youtube sharing a Short](images/youtube_short.png)
+
+---
+\
+\
+![Twitter / X](https://www.logotypes.dev/twitter?variant=wordmark&version=color)
+### **X (Twitter) Embeds**: 
+Instantly resolve tweets and display them with full media (images, videos) directly in your message feed.
+
+**Sharing a tweet with an image**:
+![Sharing a tweet with image](images/twitter_image.png)
+
+**Sharing a tweet with a video**:
+![Sharing a tweet with video](images/twitter_video.png)
+
+---
+\
+\
+![Instagram](https://www.logotypes.dev/instagram?variant=glyph&version=color)
+### **Instagram posts**: 
+Share Instagram posts and they’ll be displayed right in the chat. Also videos can be played withouth leaving the conversation.
+
+**Sharing an Instagram post**:
+![Instagram post](images/instagram_post.png)
+
+---
 
 ## 🚀 Installation
 
