@@ -13,6 +13,7 @@ const supportedLinks = [
     "https?://.*\\.youtube\\.com/v/.*",
     "https?://youtu\\.be/.*",
     "https?://.*\\.youtube\\.com/playlist\\?list=.*",
+    "https?://youtube\\.com/playlist\\?list=.*",
     "https?://.*\\.youtube\\.com/shorts/.*",
     "https?://youtube\\.com/shorts/.*",
     "https?://instagram\\.com/.*/p/.*,",
@@ -38,13 +39,14 @@ const supportedLinks = [
     "https?://open\\.spotify\\.com/.*"
 ]
 
-const spotifyUrl = "https://open.spotify.com/oembed?url="
-
 const iFrames = {
     "tweet": "<iframe height=600 width=500 border=0 frameborder=0 src='https://twitframe.com/show?url=TWEETURL'></iframe>",
     "youtube-video": '<iframe width="500" height="300" src="https://www.youtube.com/embed/VIDEOID?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>',
     "youtube-short": '<iframe width="315" height="560" src="YTSHORTURL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;gyroscope; picture-in-picture;web-share;fullscreen"></iframe>',
+    "youtube-playlist": '<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLAYLISTID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>',
     "instagram-post": '<iframe src="https://www.instagram.com/p/IGPOSTID/embed" width="400" height="600" frameborder="0" scrolling="no" allowtransparency="true" allow="encrypted-media"></iframe>',
+    "spotify-album-artist": '<iframe style="border-radius: 12px" width="100%" height="352" title="Spotify album" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="SPOTIFYURL"></iframe>',
+    "spotify-track": '<iframe style="border-radius: 12px" width="100%" height="152" title="Spotify song" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="SPOTIFYURL"></iframe>'
 }
 // End Constants
 
@@ -65,7 +67,13 @@ const isYoutubeShort = link => link.includes("youtube.com/shorts");
 
 const isYoutubeVideo = link => link.includes("youtube.com/v") || link.includes("youtube.com/watch");
 
+const isYoutubePlaylist = link => link.includes("youtube.com/playlist");
+
 const isInstagramPost = link => link.includes("instagram.com/p/");
+
+const isSpotifyAlbumOrArtist = link => link.includes("open.spotify") && !link.includes("track");
+
+const isSpotifyTrack = link => link.includes("open.spotify") && link.includes("track");
 
 function extractYouTubeVideoId(url) {
     const match = url.match(/(?:watch\?v=|v\/)([\w-]{11})/);
@@ -89,21 +97,8 @@ function hashCode(str) {
 }
 // End Util functions
 
-// Network functions
-function fetchLink(link) {
-    let url = `https://noembed.com/embed?url=${link}&maxwidth=500&maxheight=300`
-
-    if(link.includes("open.spotify")) {
-        url = `${spotifyUrl}${link}`
-    }
-    return fetch(url)
-    .then(r => {
-        return r.json()
-    })
-    .catch(error =>{ return JSON.parse({}); })
-}
-
-async function getEmbed(link) {
+// Process functions
+function getEmbed(link) {
     if (link in linksParsed) {
         return linksParsed[link];
     }
@@ -120,14 +115,21 @@ async function getEmbed(link) {
     } else if (isYoutubeVideo(link)) {
         const videoId = extractYouTubeVideoId(link);
         embed.html = iFrames["youtube-video"].replace("VIDEOID", videoId);
+    } else if (isYoutubePlaylist(link)) {
+        const playlistId = link.split("list=")[1].split("&")[0];
+        embed.html = iFrames["youtube-playlist"].replace("PLAYLISTID", playlistId);
     } else if (isInstagramPost(link)) {
         const postId = extractInstagramPostId(link);
         if (postId) {
             embed.html = iFrames["instagram-post"].replace("IGPOSTID", postId);
         }
-    } else {
-        embed = await fetchLink(link);
-    }
+    } else if (isSpotifyTrack(link)) {
+        link = link.replace("open.spotify.com/track/", "open.spotify.com/embed/track/");
+        embed.html = iFrames["spotify-track"].replace("SPOTIFYURL", link);
+    } else if (isSpotifyAlbumOrArtist(link)) {
+        link = link.replace("open.spotify.com/", "open.spotify.com/embed/");
+        embed.html = iFrames["spotify-album-artist"].replace("SPOTIFYURL", link);
+    } 
 
     if (embed.html) {
         embed.html = `<div class="embedded-media-${hash}">${embed.html}</div>`;
@@ -136,16 +138,14 @@ async function getEmbed(link) {
     linksParsed[link] = embed;
     return embed;
 }
-// End Network functions
 
-// Process functions
 const processLink = async (target, link) => {
     const href = link.href;
     const hash = hashCode(href);
     const embeddedMedia = target.getElementsByClassName(`embedded-media-${hash}`);
 
     if (embeddedMedia.length === 0 && isASupportedLink(href) && link.children.length === 0) {
-        const result = await getEmbed(href);
+        const result = getEmbed(href);
         if (result.html) {
             if (link.parentElement) {
                 link.parentElement.innerHTML += `<br />${result.html}`;
@@ -291,7 +291,6 @@ const observerCallback = async function(mutationsList, observer) {
             break;
     }
 };
-
 
 // Observe the document body for subtree modifications
 observeNode(document.body, observerCallback);
