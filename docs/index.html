@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Teams - Retro Vanilla Software</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Title Bar -->
+    <header class="title-bar">
+        <div class="title-container">
+            <h1>Better Teams</h1>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <img src="../images/better_teams_icon.png" alt="Retro Vanilla Logo" class="retro-logo">
+            <h1>Better Teams</h1>
+        </div>
+
+        <!-- Tagline Section -->
+        <div class="tagline">
+            <h2>Supercharge your Microsoft Teams experience</h2>
+            <p>Enhance media sharing and reactions for smoother team collaboration</p>
+        </div>
+
+        <!-- Button Section -->
+        <div class="button-container">
+            <a href="#features" class="btn see-features">See Features</a>
+            <a href="#install" class="btn install">Install Now</a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>Features</h2>
+        <div class="features-container">
+            <!-- Carousel Section (Left) -->
+            <div class="carousel">
+                <div class="carousel-images">
+                    <img src="../images/reactions.png" alt="Reaction Buttons" class="carousel-item active">
+                    <img src="../images/spotify_list.png" alt="Spotify List" class="carousel-item">
+                    <img src="../images/spotify_song.png" alt="Spotify Song" class="carousel-item">
+                    <img src="../images/twitter_image.png" alt="Twitter Image" class="carousel-item">
+                    <img src="../images/twitter_video.png" alt="Twitter Video" class="carousel-item">
+                    <img src="../images/youtube_short.png" alt="Youtube Short" class="carousel-item">
+                    <img src="../images/youtube_video.png" alt="Youtube Video" class="carousel-item">
+                    <img src="../images/instagram_post.png" alt="Instagram Post" class="carousel-item">
+                </div>
+                <div class="carousel-controls">
+                    <button class="prev-btn">←</button>
+                    <button class="next-btn">→</button>
+                </div>
+            </div>
+
+            <!-- Description Section (Right) -->
+            <div class="description">
+                <h3><img src="../images/reactions_icon.png" alt="Reactions icon" class="feature-icon" /> Easy Access Call Reactions</h3>
+                <p>Reaction buttons now live out of the popup menu and onto the call action bar to avoid mistakenly raising your hand when you just want to react!</p>
+                <br />
+                <h3><img src="../images/notifications_icon.png" alt="Notifications icon" class="feature-icon"/> Notifications relocated</h3>
+                <p>New message notification no longer cover your message box. You can keep typing without the need of waiting for the notification to go away or clicking on it.</p>
+                <br />
+                <h3><img src="../images/spotify_icon.png" alt="Spotify icon" class="feature-icon"/> Spotify player</h3>
+                <p>Spotify links to songs, albums or artists can be played directly in the Teams window.</p>
+                <br />
+                <h3><img src="../images/twitter_icon.png" alt="Twitter icon" class="feature-icon"/> X/Twitter integration</h3>
+                <p>Received a tweet? You can see it directly in your window without the need of clicking on it.</p>
+                <br />
+                <h3><img src="../images/youtube_icon.png" alt="Youtube icon" class="feature-icon"/> Youtube player</h3>
+                <p>Somebory sent a link youtube video? You can play it right there without the need of leaving to Youtube anymore.</p>
+                <br />
+                <h3><img src="../images/instagram_icon.png" alt="Instagram icon" class="feature-icon"/> Instagram integration</h3>
+                <p>You can see that post directly in your chat without having to leave anywhere else.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2024 Retro Vanilla Software. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+
+        let currentIndex = 0;
+        const slideIntervalTime = 3000; // 5 seconds interval
+
+        function showSlide(index) {
+            carouselItems.forEach((item, i) => {
+                item.classList.remove('active');
+                if (i === index) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
+            showSlide(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
+            showSlide(currentIndex);
+        });
+
+        // Automatically change slides every 5 seconds
+        const autoSlide = setInterval(() => {
+            currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
+            showSlide(currentIndex);
+        }, slideIntervalTime);
+
+        // Initial display of the first image
+        showSlide(currentIndex);
+    </script>
+
+</body>
+</html>

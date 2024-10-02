@@ -1,0 +1,201 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Container for main section */
+.container {
+    background: rgb(54,48,120);
+    background: linear-gradient(180deg, rgba(54,48,120,1) 0%, rgba(140,158,230,1) 35%, rgba(140,158,230,1) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: black;
+    text-align: center;
+}
+
+/* Logo Section */
+.logo-section {
+    font-size: 2.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.retro-logo {
+    width: 200px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+/* Title Bar */
+.title-bar {
+    background-color: black;
+    color: white;
+    width: 100%;
+    padding: 10px 0;
+    text-align: left;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.title-bar h1 {
+    font-size: 1.5em;
+    margin-left: 20px;
+}
+
+
+/* Tagline Section */
+.tagline h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.tagline p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+/* Button Section */
+.button-container {
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.see-features {
+    background-color: #000000; /* Yellow button */
+    color: #ffffff;
+}
+
+.see-features:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.install {
+    background-color: lightgreen; /* Blue button */
+    color: black;
+}
+
+.install:hover {
+    background-color: white;
+    color: green;
+}
+
+/* Features Section */
+.features {
+    padding: 60px 20px;
+    background-color: white;
+    color: #333;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 2.5em;
+    color: #229C9F;
+    margin-bottom: 40px;
+}
+
+/* Two-column layout for the features container */
+.features-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50%;
+}
+
+/* Carousel Section (Left) */
+.carousel {
+    flex: 1;
+    position: relative;
+    max-width: 600px;
+}
+
+.carousel-images {
+    display: flex;
+    overflow: hidden;
+}
+
+.carousel-item {
+    min-width: 100%;
+    transition: transform 0.5s ease;
+    opacity: 0;
+    display: none;
+}
+
+.carousel-item.active {
+    display: block;
+    opacity: 1;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.prev-btn, .next-btn {
+    background-color: #229C9F;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background-color: #196e6d;
+}
+
+/* Description Section (Right) */
+.description {
+    flex: 1;
+    text-align: left;
+}
+
+.description h3 {
+    font-size: 2em;
+    color: #229C9F;
+    margin-bottom: 20px;
+}
+
+.description p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Footer Section */
+.footer {
+    background-color: #229C9F;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}

@@ -1,7 +1,7 @@
   {
     "name": "Better Teams",
     "short_name": "BetterTeams",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Better Teams. Improved MS Teams Experience.",
     "manifest_version": 3,
     "icons": {
@@ -21,8 +21,5 @@
             ],
             "run_at": "document_idle"
         }
-    ],
-    "host_permissions": [
-        "https://noembed.com/*"
     ]
   }
