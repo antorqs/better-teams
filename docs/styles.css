@@ -100,6 +100,20 @@
     color: green;
 }
 
+.ghrepo {
+    background-color: #000000; /* Yellow button */
+    color: #ffffff;
+}
+
+.ghrepo:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.ghrepo img{
+    height: 16px;
+}
+
 /* Features Section */
 .features {
     padding: 60px 20px;
@@ -127,6 +141,21 @@
 .feature-icon {
     width: 50px;
     height: 50%;
+}
+
+/* Features Section */
+.privacy {
+    height: 95vh;
+    padding: 60px 20px;
+    background-color: white;
+    color: #333;
+    text-align: center;
+}
+
+.privacy h2 {
+    font-size: 2.5em;
+    color: #229C9F;
+    margin-bottom: 40px;
 }
 
 /* Carousel Section (Left) */
