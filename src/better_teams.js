@@ -71,9 +71,9 @@ const isYoutubePlaylist = link => link.includes("youtube.com/playlist");
 
 const isInstagramPost = link => link.includes("instagram.com/p/");
 
-const isSpotifyAlbumOrArtist = link => link.includes("open.spotify") && !link.includes("track");
+const isSpotifyAlbumOrArtist = link => link.includes("open.spotify") && !link.includes("/track");
 
-const isSpotifyTrack = link => link.includes("open.spotify") && link.includes("track");
+const isSpotifyTrack = link => link.includes("open.spotify") && link.includes("/track");
 
 function extractYouTubeVideoId(url) {
     const match = url.match(/(?:watch\?v=|v\/)([\w-]{11})/);
@@ -107,11 +107,11 @@ function getEmbed(link) {
     let embed = {};
 
     if (isTwitterLink(link)) {
-        link = link.replace("x.com", "twitter.com");
-        embed.html = iFrames["tweet"].replace("TWEETURL", link);
+        let elink = link.replace("x.com", "twitter.com");
+        embed.html = iFrames["tweet"].replace("TWEETURL", elink);
     } else if (isYoutubeShort(link)) {
-        link = link.replace("shorts", "embed");
-        embed.html = iFrames["youtube-short"].replace("YTSHORTURL", link);
+        let elink = link.replace("shorts", "embed");
+        embed.html = iFrames["youtube-short"].replace("YTSHORTURL", elink);
     } else if (isYoutubeVideo(link)) {
         const videoId = extractYouTubeVideoId(link);
         embed.html = iFrames["youtube-video"].replace("VIDEOID", videoId);
@@ -124,11 +124,11 @@ function getEmbed(link) {
             embed.html = iFrames["instagram-post"].replace("IGPOSTID", postId);
         }
     } else if (isSpotifyTrack(link)) {
-        link = link.replace("open.spotify.com/track/", "open.spotify.com/embed/track/");
-        embed.html = iFrames["spotify-track"].replace("SPOTIFYURL", link);
+        let elink = link.replace("/embed/", "/").replace("/track/", "/embed/track/");
+        embed.html = iFrames["spotify-track"].replace("SPOTIFYURL", elink);
     } else if (isSpotifyAlbumOrArtist(link)) {
-        link = link.replace("open.spotify.com/", "open.spotify.com/embed/");
-        embed.html = iFrames["spotify-album-artist"].replace("SPOTIFYURL", link);
+        let elink = link.replace("/embed/", "/").replace("/album/", "/embed/album/").replace("/artist/", "/embed/artist/");
+        embed.html = iFrames["spotify-album-artist"].replace("SPOTIFYURL", elink);
     } 
 
     if (embed.html) {
