@@ -1,7 +1,7 @@
   {
     "name": "Better Teams",
     "short_name": "BetterTeams",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "Better Teams. Improved MS Teams Experience.",
     "manifest_version": 3,
     "icons": {
