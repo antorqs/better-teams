@@ -65,7 +65,7 @@ const isTwitterLink = link => link.includes("x.com") || link.includes("twitter.c
 
 const isYoutubeShort = link => link.includes("youtube.com/shorts");
 
-const isYoutubeVideo = link => link.includes("youtube.com/v") || link.includes("youtube.com/watch");
+const isYoutubeVideo = link => link.includes("youtube.com/v") || link.includes("youtube.com/watch") || link.includes("youtu.be/");
 
 const isYoutubePlaylist = link => link.includes("youtube.com/playlist");
 
@@ -76,6 +76,7 @@ const isSpotifyAlbumOrArtist = link => link.includes("open.spotify") && !link.in
 const isSpotifyTrack = link => link.includes("open.spotify") && link.includes("/track");
 
 function extractYouTubeVideoId(url) {
+    url = url.replace("youtu.be/", "youtube.com/watch?v=");
     const match = url.match(/(?:watch\?v=|v\/)([\w-]{11})/);
     return match ? match[1] : null;
 }
@@ -232,6 +233,7 @@ const observerCallback = async function(mutationsList, observer) {
         messagesList: document.body.querySelector('[data-tid="message-pane-list-runway"]'),
         postsList: document.body.querySelector('[data-tid="channel-pane-viewport"]'),
         repliesList: document.body.querySelector('[data-tid="channel-replies-viewport"]'),
+        share: document.body.querySelector('[id="share-button"]'),
         reactions: document.body.querySelector('[id="reaction-menu-button"]'),
         shortcut: document.body.querySelector('[id="reactions-shortcut"]')
     };
@@ -280,8 +282,13 @@ const observerCallback = async function(mutationsList, observer) {
                 button.onclick = () => sendReaction(reaction);
             });
 
-            const parentElement = elements.reactions.parentElement;
-            parentElement.insertBefore(template, parentElement.children[0]);
+            const parentElement = elements.reactions.parentElement.parentElement;
+            parentElement.insertBefore(template, parentElement.firstChild);
+
+            // Move share button
+            const shareParent = elements.share.parentElement.parentElement;
+            const separator = shareParent.querySelector('[id="divider-primary"]');
+            shareParent.insertBefore(elements.share, separator.nextSibling);
 
             break;
 
