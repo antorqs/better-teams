@@ -266,30 +266,32 @@ const observerCallback = async function(mutationsList, observer) {
             break;
 
         case elements.reactions !== null && !elements.shortcut: // Reactions (In a call)
-            elements.reactions.setAttribute("style", "visibility: hidden; position: absolute; left: -9999px;");
-            elements.reactions.click();
-            const reactionsButtons = document.querySelector("[data-tid=reactions-popup]").cloneNode(true);
-            elements.reactions.click();
             const template = document.createElement('div');
             template.setAttribute('style', 'display: flex');
-            template.setAttribute('id', 'reactions-shortcut');
-            reactionsButtons.setAttribute('data-tid', 'reactions-popup-bt');
-            template.appendChild(reactionsButtons);
-
-            const buttons = template.querySelectorAll('button');
-            buttons.forEach(button => {
-                const reaction = button.getAttribute('id');
-                button.onclick = () => sendReaction(reaction);
-            });
-
+            template.setAttribute('id', 'reactions-shortcut'); 
             const parentElement = elements.reactions.parentElement.parentElement;
-            parentElement.insertBefore(template, parentElement.firstChild);
+            parentElement.insertBefore(template, parentElement.firstChild);   
+
+            elements.reactions.setAttribute("style", "visibility: hidden; position: absolute; left: -9999px;");
+            elements.reactions.click();
+
+            setTimeout(() => {
+                const reactionsButtons = document.querySelector("[data-tid=reactions-popup]").cloneNode(true);
+                elements.reactions.click();
+                reactionsButtons.setAttribute('data-tid', 'reactions-popup-bt');
+                template.appendChild(reactionsButtons);
+
+                const buttons = template.querySelectorAll('button');
+                buttons.forEach(button => {
+                    const reaction = button.getAttribute('id');
+                    button.onclick = () => sendReaction(reaction);
+                });
+            }, 100);
 
             // Move share button
             const shareParent = elements.share.parentElement.parentElement;
-            const separator = shareParent.querySelector('[id="divider-primary"]');
-            shareParent.insertBefore(elements.share, separator.nextSibling);
-
+            const separator = shareParent.querySelector('[id="divider-horizontalMiddleEnd/secondary"]');
+            shareParent.insertBefore(elements.share, separator.parentElement);
             break;
 
         default:
