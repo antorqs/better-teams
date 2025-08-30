@@ -16,10 +16,17 @@
             "matches": [
                 "https://teams.microsoft.com/*"
             ],
-            "js": [
-                "src/better_teams.js"
-            ],
+      "js": [
+        "dist/better_teams.bundle.js"
+      ],
             "run_at": "document_idle"
         }
+    ],
+    "options_page": "options.html",
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "permissions": [
+      "storage"
     ]
   }

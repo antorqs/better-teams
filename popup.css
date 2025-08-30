@@ -1,0 +1,159 @@
+body {
+  margin: 0;
+  font-family: "Press Start 2P", "Segoe UI", Arial, sans-serif; /* Retro pixel style if available */
+  background: #f5f6fa;
+  color: #333;
+  width: 350px;
+}
+
+.popup {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10), 0 0 0 1px #e0e0e0;
+  padding: 24px 20px 20px 20px;
+  margin: 10px 10px 10px 10px;
+  width: 100%;
+  max-width: 330px;
+  box-sizing: border-box;
+}
+
+/* --- HEADER --- */
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  background: #c6cff4; /* Teal brand */
+  padding: 8px;
+  border-radius: 6px;
+  color: #363078;
+  justify-content: center;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+}
+
+h1 {
+  font-size: 14px;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* --- OPTIONS --- */
+.options {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.options span {
+  margin-left: 10px;
+  font-size: 13px;
+}
+
+/* --- RESET BUTTON --- */
+.reset-btn {
+  background: #363078;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.reset-btn:hover {
+  background: #8c9ee6;
+  color: #363078;
+}
+
+/* --- DIVIDER --- */
+hr {
+  margin: 15px 0;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+
+/* --- SWITCH STYLE --- */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .3s;
+  border-radius: 22px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #8c9ee6;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+  left: -7px;
+}
+
+/* --- CTA SECTION --- */
+.cta {
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.cta strong {
+  color: #363078;
+}
+
+.cta a {
+  color: #d81b60; /* Nice magenta contrast */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cookie-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 20px;
+  background: #ffdd00;
+  border-radius: 6px;
+  font-family: 'Cookie', cursive, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 2rem;
+  color: #000 !important;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.cookie-btn:hover {
+  background: #ffcc00;
+}

@@ -1,3 +1,6 @@
+import { relocateNotifications, sendReaction } from './modules/ui.js';
+import { getEmbed } from './modules/embeds.js';
+import { hashCode } from './modules/utils.js';
 // Constants
 const supportedLinks = [
     "https?://twitter\\.com/.*/status/.*",
@@ -50,107 +53,53 @@ const iFrames = {
 }
 // End Constants
 
+
 // Vars
-let linksParsed = {}
-let lastLoaded = null
+let lastLoaded = null;
 const config = { childList: true, subtree: true };
+let settings = {
+    enablePreviews: true,
+    enableUITweaks: true
+};
+
+function updateSettings() {
+    chrome.storage && chrome.storage.sync.get(settings, (stored) => {
+        settings = { ...settings, ...stored };
+    });
+}
+
+updateSettings();
+
+if (chrome.storage && chrome.storage.onChanged) {
+    chrome.storage.onChanged.addListener((changes, area) => {
+        if (area === 'sync') {
+            Object.keys(changes).forEach((key) => {
+                settings[key] = changes[key].newValue;
+            });
+        }
+    });
+}
 // End Vars
 
-// Util functions
+
 function isASupportedLink(link) {
     return supportedLinks.some(supportedLink => new RegExp(`^${supportedLink}$`).test(link));
 }
-
-const isTwitterLink = link => link.includes("x.com") || link.includes("twitter.com");
-
-const isYoutubeShort = link => link.includes("youtube.com/shorts");
-
-const isYoutubeVideo = link => link.includes("youtube.com/v") || link.includes("youtube.com/watch") || link.includes("youtu.be/");
-
-const isYoutubePlaylist = link => link.includes("youtube.com/playlist");
-
-const isInstagramPost = link => link.includes("instagram.com/p/");
-
-const isSpotifyAlbumOrArtist = link => link.includes("open.spotify") && !link.includes("/track");
-
-const isSpotifyTrack = link => link.includes("open.spotify") && link.includes("/track");
-
-function extractYouTubeVideoId(url) {
-    url = url.replace("youtu.be/", "youtube.com/watch?v=");
-    const match = url.match(/(?:watch\?v=|v\/)([\w-]{11})/);
-    return match ? match[1] : null;
-}
-
-function extractInstagramPostId(url) {
-    const match = url.match(/\/p\/([^\/?]+)/);
-    return match ? match[1] : null;
-}
-
-function hashCode(str) {
-    let hash = 0;
-    if (str.length === 0) return hash;
-    for (let i = 0; i < str.length; i++) {
-        const char = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
-        hash = hash & hash; // Convert to 32bit integer
-    }
-    return hash;
-}
 // End Util functions
 
-// Process functions
-function getEmbed(link) {
-    if (link in linksParsed) {
-        return linksParsed[link];
-    }
-
-    const hash = hashCode(link);
-    let embed = {};
-
-    if (isTwitterLink(link)) {
-        let elink = link.replace("x.com", "twitter.com");
-        embed.html = iFrames["tweet"].replace("TWEETURL", elink);
-    } else if (isYoutubeShort(link)) {
-        let elink = link.replace("shorts", "embed");
-        embed.html = iFrames["youtube-short"].replace("YTSHORTURL", elink);
-    } else if (isYoutubeVideo(link)) {
-        const videoId = extractYouTubeVideoId(link);
-        embed.html = iFrames["youtube-video"].replace("VIDEOID", videoId);
-    } else if (isYoutubePlaylist(link)) {
-        const playlistId = link.split("list=")[1].split("&")[0];
-        embed.html = iFrames["youtube-playlist"].replace("PLAYLISTID", playlistId);
-    } else if (isInstagramPost(link)) {
-        const postId = extractInstagramPostId(link);
-        if (postId) {
-            embed.html = iFrames["instagram-post"].replace("IGPOSTID", postId);
-        }
-    } else if (isSpotifyTrack(link)) {
-        let elink = link.replace("/embed/", "/").replace("/track/", "/embed/track/");
-        embed.html = iFrames["spotify-track"].replace("SPOTIFYURL", elink);
-    } else if (isSpotifyAlbumOrArtist(link)) {
-        let elink = link.replace("/embed/", "/").replace("/album/", "/embed/album/").replace("/artist/", "/embed/artist/");
-        embed.html = iFrames["spotify-album-artist"].replace("SPOTIFYURL", elink);
-    } 
-
-    if (embed.html) {
-        embed.html = `<div class="embedded-media-${hash}">${embed.html}</div>`;
-    }
-
-    linksParsed[link] = embed;
-    return embed;
-}
 
 const processLink = async (target, link) => {
+    if (!settings.enablePreviews) return;
     const href = link.href;
     const hash = hashCode(href);
     const embeddedMedia = target.getElementsByClassName(`embedded-media-${hash}`);
 
     if (embeddedMedia.length === 0 && isASupportedLink(href) && link.children.length === 0) {
         const result = getEmbed(href);
-        if (result.html) {
+        if (result && result.html) {
             if (link.parentElement) {
                 link.parentElement.innerHTML += `<br />${result.html}`;
-            } 
+            }
         }
     }
 };
@@ -164,21 +113,8 @@ const processMessage = async (message) => {
 }
 // End Process functions
 
-// UI functions
-const relocateNotifications = () => {
-    const notifications = document.body.querySelector("[data-tid=app-layout-area--in-app-notifications]");
- 
-    if (notifications) {
-        notifications.setAttribute(
-            "style",
-            "position: fixed; top: 112px; right: 0; max-height: 0px"
-        );
-    }
-}
-
 function removeUrlPreview(target, link) {
     const href = link.href;
-
     if (isASupportedLink(link.href)) {
         const elements = target.querySelectorAll(`[data-tid="url-preview"]`);
         elements.forEach(element => {
@@ -189,12 +125,6 @@ function removeUrlPreview(target, link) {
         });
     }
 }
-
-function sendReaction(reaction){
-    document.getElementById("reaction-menu-button").click(); 
-    document.querySelector("[data-tid=reactions-popup]").querySelector(`button[id="${reaction}"]`).click()
-}
-// End UI functions
 
 // Main
 let observedNodes = new Map();
@@ -227,7 +157,9 @@ const handleNewNode = async (event) => {
 
 // Main observer setup
 const observerCallback = async function(mutationsList, observer) {
-    relocateNotifications();
+    if (settings.enableUITweaks) {
+        relocateNotifications();
+    }
 
     const elements = {
         messagesList: document.body.querySelector('[data-tid="message-pane-list-runway"]'),
@@ -265,7 +197,7 @@ const observerCallback = async function(mutationsList, observer) {
             await processList(elements.repliesList, '[data-tid="channel-replies-pane-message"]');
             break;
 
-        case elements.reactions !== null && !elements.shortcut: // Reactions (In a call)
+        case elements.reactions !== null && !elements.shortcut && settings.enableUITweaks: // Reactions (In a call)
             const template = document.createElement('div');
             template.setAttribute('style', 'display: flex');
             template.setAttribute('id', 'reactions-shortcut'); 

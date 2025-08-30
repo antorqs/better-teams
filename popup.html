@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Better Teams</title>
+  <link href="https://fonts.googleapis.com/css?family=Cookie&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup">
+    <!-- Header -->
+    <div class="header">
+      <img src="icons/icon48.png" alt="Better Teams Logo" class="logo">
+      <h1>Better Teams</h1>
+    </div>
+
+    <!-- Options -->
+    <div class="options">
+      <label class="switch">
+        <input type="checkbox" id="enablePreviews" checked>
+        <span class="slider"></span>
+      </label>
+      <span>Enable link previews</span>
+    </div>
+
+    <div class="options">
+      <label class="switch">
+        <input type="checkbox" id="enableUITweaks" checked>
+        <span class="slider"></span>
+      </label>
+      <span>Enable UI tweaks</span>
+    </div>
+
+    <button id="resetBtn" class="reset-btn">Reset to Defaults</button>
+
+    <hr>
+
+    <!-- CTA Section -->
+    <div class="cta">
+      <p>💜 Enjoying <strong>Better Teams</strong>?<br> 
+        Please <a href="https://chromewebstore.google.com/detail/better-teams/onfojkdcabddnkojnmkfnjocaocbhfbi/reviews" target="_blank">leave a review</a>.<br> It only takes a minute and really helps me!</p>
+
+      <p>If you're feeling extra-awesome, you can also<br>
+        <a href="https://www.buymeacoffee.com/anto.dev" target="_blank" class="cookie-btn">
+          🍪 Buy me a cookie
+        </a><br>
+        I'll be sure to enjoy it! Thank you!
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

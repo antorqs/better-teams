@@ -1,0 +1,17 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# OS/Editor files
+*.DS_Store
+*.log
+.vscode/
+
+# Backup or temp files
+options copy.html
+
+# Others
+*.swp
+*.tmp

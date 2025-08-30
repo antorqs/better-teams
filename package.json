@@ -1,0 +1,13 @@
+{
+  "name": "better-teams-extension",
+  "version": "1.0.0",
+  "description": "Chrome extension for enhanced Microsoft Teams experience",
+  "main": "src/better_teams.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "rollup": "^4.49.0"
+  }
+}
