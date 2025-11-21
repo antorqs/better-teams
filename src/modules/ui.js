@@ -10,7 +10,7 @@ function relocateNotifications() {
 }
 
 function sendReaction(reaction){
-    document.getElementById("reaction-menu-button").click(); 
+    document.getElementById("reaction-menu-button-toolbox").click(); 
     document.querySelector("[data-tid=reactions-popup]").querySelector(`button[id="${reaction}"]`).click()
 }
 

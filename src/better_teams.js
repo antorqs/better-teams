@@ -208,7 +208,7 @@ const observerCallback = async function(mutationsList, observer) {
             elements.reactions.click();
 
             setTimeout(() => {
-                const reactionsButtons = document.querySelector("[data-tid=reactions-popup]").cloneNode(true);
+                const reactionsButtons = document.querySelector("[data-tid=reaction-menu-button-toolbox]").cloneNode(true);
                 elements.reactions.click();
                 reactionsButtons.setAttribute('data-tid', 'reactions-popup-bt');
                 template.appendChild(reactionsButtons);
