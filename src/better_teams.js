@@ -218,7 +218,7 @@ const observerCallback = async function(mutationsList, observer) {
                     const reaction = button.getAttribute('id');
                     button.onclick = () => sendReaction(reaction);
                 });
-            }, 100);
+            }, 50);
 
             // Move share button
             const shareParent = elements.share.parentElement.parentElement;

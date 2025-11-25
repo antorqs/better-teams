@@ -10,8 +10,12 @@ function relocateNotifications() {
 }
 
 function sendReaction(reaction){
-    document.getElementById("reaction-menu-button-toolbox").click(); 
-    document.querySelector("[data-tid=reactions-popup]").querySelector(`button[id="${reaction}"]`).click()
+    document.getElementById("reaction-menu-button").click(); 
+    document.querySelector("[data-tid=reaction-menu-button-toolbox]").setAttribute("style", "opacity: 0; position: absolute; left: -9999px;");
+    document.querySelector("[data-tid=reaction-menu-button-toolbox]").querySelector(`button[id="${reaction}"]`).click()
+    setTimeout(() => {
+        document.getElementById("reaction-menu-button").click(); 
+    }, 50);
 }
 
 export { relocateNotifications, sendReaction };
