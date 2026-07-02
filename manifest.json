@@ -14,7 +14,8 @@
         {
             "all_frames": true,
             "matches": [
-                "https://teams.microsoft.com/*"
+                "https://teams.microsoft.com/*",
+                "*://teams.cloud.microsoft/*"
             ],
       "js": [
         "dist/better_teams.bundle.js"
