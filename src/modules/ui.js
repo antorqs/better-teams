@@ -10,12 +10,23 @@ function relocateNotifications() {
 }
 
 function sendReaction(reaction){
-    document.getElementById("reaction-menu-button").click(); 
-    document.querySelector("[data-tid=reaction-menu-button-toolbox]").setAttribute("style", "opacity: 0; position: absolute; left: -9999px;");
-    document.querySelector("[data-tid=reaction-menu-button-toolbox]").querySelector(`button[id="${reaction}"]`).click()
-    setTimeout(() => {
-        document.getElementById("reaction-menu-button").click(); 
-    }, 50);
+    const menuButton = document.getElementById("reaction-menu-button");
+    if (!menuButton) return;
+
+    const observer = new MutationObserver((_, obs) => {
+        const toolbox = document.querySelector("[data-tid=reaction-menu-button-toolbox]");
+        if (!toolbox) return;
+
+        const reactionButton = toolbox.querySelector(`button[id="${reaction}"]`);
+        if (!reactionButton) return;
+
+        obs.disconnect();
+        toolbox.setAttribute("style", "opacity: 0; position: absolute; left: -9999px;");
+        reactionButton.click();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    menuButton.click();
 }
 
 export { relocateNotifications, sendReaction };
